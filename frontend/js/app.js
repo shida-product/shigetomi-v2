@@ -85,6 +85,11 @@ class CheckinForm {
     const sectionDesc = (texts.descriptions && texts.descriptions[sectionNum]) || texts.description || '';
     this.stepDesc.innerHTML = sectionDesc.replace(/\n/g, '<br>');
 
+    // 戻りリンクテキスト更新
+    const backLabels = { ja: '言語選択', en: 'Language', ko: '언어 선택', 'zh-TW': '語言選擇', 'zh-CN': '语言选择', es: 'Idioma' };
+    const backLinkText = document.getElementById('back-link-text');
+    if (backLinkText) backLinkText.textContent = backLabels[this.currentLang] || 'Language';
+
     // ステッパー更新
     this.renderStepper(texts);
 
