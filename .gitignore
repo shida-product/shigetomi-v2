@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Supabase local
+supabase/.temp/
+
+# Misc
+*.log

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Check-in | 宿 重富</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        sumi: '#2C2C2C',
+                        shu: '#C53D43',
+                        'shu-dark': '#A33036',
+                        washi: '#F5F0E8',
+                        'washi-dark': '#EDE6D8',
+                        kinu: '#F9F5ED',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23d4c5a0'/%3E%3Crect width='2' height='2' fill='%23c9b896' x='0' y='0'/%3E%3C/svg%3E");
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+        .fade-up { opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+        .slide-in-right { animation: slideInRight 0.35s ease-out forwards; }
+        .slide-in-left { animation: slideInLeft 0.35s ease-out forwards; }
+
+        /* Progress bar */
+        .progress-track { height: 3px; background: rgba(44,44,44,0.06); }
+        .progress-fill { height: 3px; background: #C53D43; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Form elements */
+        .form-input {
+            width: 100%;
+            border: 1px solid #DDD5C8;
+            border-radius: 0.5rem;
+            padding: 0.875rem 1rem;
+            background: #FFFCF7;
+            color: #2C2C2C;
+            font-size: 16px;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+        .form-input:hover { border-color: #C9BEAB; }
+        .form-input:focus { border-color: #C53D43; background: #fff; box-shadow: 0 0 0 3px rgba(197,61,67,0.08); }
+        .form-input::placeholder { color: #B5AFA3; }
+        textarea.form-input { min-height: 100px; resize: vertical; }
+
+        .pill-radio input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .pill-label {
+            display: block; width: 100%; text-align: center;
+            padding: 0.875rem 1.25rem; border: 1.5px solid #DDD5C8; border-radius: 0.5rem;
+            font-size: 0.9rem; font-weight: 500; color: #7A7365; background: #FFFCF7;
+            cursor: pointer; transition: all 0.2s; user-select: none;
+        }
+        .pill-label:hover { border-color: #C9BEAB; background: #FFF; }
+        .pill-radio input[type="radio"]:checked + .pill-label { border-color: #C53D43; color: #C53D43; background: #FFF7F7; }
+
+        .upload-zone {
+            width: 100%; border: 2px dashed #DDD5C8; border-radius: 0.75rem;
+            padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; background: #FFFCF7; cursor: pointer; transition: all 0.25s;
+        }
+        .upload-zone:hover { border-color: #C53D43; background: #FFF7F7; }
+        .upload-zone.selected { border-color: #5B8C5A; background: #F5FAF5; border-style: solid; }
+
+        .custom-checkbox { width: 1.25rem; height: 1.25rem; accent-color: #C53D43; cursor: pointer; }
+
+        /* Stepper */
+        .stepper-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            border: 2px solid #DDD5C8; background: #F5F0E8;
+            transition: all 0.3s ease; flex-shrink: 0; position: relative; z-index: 2;
+        }
+        .stepper-dot.active { border-color: #C53D43; background: #C53D43; box-shadow: 0 0 0 4px rgba(197,61,67,0.12); }
+        .stepper-dot.done { border-color: #C53D43; background: #C53D43; }
+        .stepper-line {
+            flex: 1; height: 2px; background: #DDD5C8; transition: background 0.3s ease;
+        }
+        .stepper-line.done { background: #C53D43; }
+        .stepper-label {
+            font-size: 10px; color: #B5AFA3; white-space: nowrap; transition: color 0.3s ease;
+            max-width: 56px; text-align: center; overflow: hidden; text-overflow: ellipsis;
+        }
+        .stepper-label.active { color: #C53D43; font-weight: 500; }
+        .stepper-label.done { color: #2C2C2C; }
+    </style>
+</head>
+<body class="min-h-screen bg-washi font-sans text-sumi">
+    <!-- Stepper Header (top-fixed) -->
+    <div class="sticky top-0 z-30 bg-washi/90 backdrop-blur-sm border-b border-sumi/[0.04]">
+        <div class="max-w-lg mx-auto px-4 pt-4 pb-3">
+            <!-- Back arrow -->
+            <div class="flex items-center mb-3">
+                <a href="index.html" id="back-link" class="text-sumi/40 hover:text-shu transition-colors no-underline">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                </a>
+            </div>
+            <!-- Stepper dots + labels -->
+            <div id="stepper-container">
+                <!-- Dynamically generated by app.js -->
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-lg mx-auto pt-4 pb-16 px-4 sm:px-6">
+        <!-- Step Content Container -->
+        <div id="step-container" class="min-h-[60vh] flex flex-col">
+            <!-- Header (changes per step) -->
+            <header class="mb-8">
+                <div class="w-8 h-[2px] bg-shu rounded-full mb-5"></div>
+                <h2 id="step-title" class="font-serif text-xl sm:text-2xl font-medium tracking-wide text-sumi mb-2"></h2>
+                <p id="step-desc" class="text-sm text-sumi/50 leading-relaxed"></p>
+            </header>
+
+            <!-- Dynamic Fields Area -->
+            <div id="fields-area" class="flex-1 space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="mt-10 flex gap-3" id="nav-buttons">
+            <button type="button" id="prev-btn" class="hidden flex-none px-5 py-3.5 rounded-lg border border-sumi/10 text-sumi/60 hover:text-sumi hover:border-sumi/20 transition-all text-sm font-medium">
+                <span id="prev-text">戻る</span>
+            </button>
+            <button type="button" id="next-btn" class="flex-1 bg-shu hover:bg-shu-dark text-white font-medium py-3.5 px-6 rounded-lg shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex justify-center items-center text-base tracking-wider">
+                <span id="next-text">次へ</span>
+                <svg id="next-arrow" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <svg id="submit-spinner" class="animate-spin ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </div>
+
+        <footer class="text-center pt-10 mt-6">
+            <p class="text-sumi/20 text-xs tracking-[0.2em] font-serif">宿 重富</p>
+        </footer>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden" style="background: rgba(44,44,44,0.3); backdrop-filter: blur(4px);">
+        <div class="bg-kinu rounded-xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-sumi/5 fade-up">
+            <div class="text-center mb-6">
+                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-50 mb-4">
+                    <svg class="h-7 w-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-sumi font-serif mb-2">ありがとうございます</h3>
+                <p id="success-message" class="text-sumi/50 text-sm leading-relaxed"></p>
+            </div>
+            <a href="index.html" class="block w-full text-center bg-sumi/5 hover:bg-sumi/10 text-sumi font-medium py-3 px-4 rounded-lg transition no-underline text-sm">
+                トップへ戻る
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

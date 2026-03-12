@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>宿 重富 | Check-in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        sumi: '#2C2C2C',
+                        shu: '#C53D43',
+                        'shu-dark': '#A33036',
+                        washi: '#F5F0E8',
+                        'washi-dark': '#EDE6D8',
+                        'kinu': '#F9F5ED',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .lang-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .lang-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px -4px rgba(197, 61, 67, 0.15);
+        }
+        .lang-card:active {
+            transform: scale(0.98);
+        }
+        /* Staggered animation */
+        .lang-card:nth-child(1) { animation-delay: 0.15s; }
+        .lang-card:nth-child(2) { animation-delay: 0.22s; }
+        .lang-card:nth-child(3) { animation-delay: 0.29s; }
+        .lang-card:nth-child(4) { animation-delay: 0.36s; }
+        .lang-card:nth-child(5) { animation-delay: 0.43s; }
+        .lang-card:nth-child(6) { animation-delay: 0.50s; }
+        /* Subtle washi paper texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23d4c5a0'/%3E%3Crect width='2' height='2' fill='%23c9b896' x='0' y='0'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-washi text-sumi font-sans">
+
+    <main class="min-h-screen flex flex-col items-center justify-center px-5 py-12">
+        <!-- Header -->
+        <div class="text-center mb-14 fade-up" style="animation-delay: 0s;">
+            <!-- 朱色の横線（障子の桟をイメージ） -->
+            <div class="w-12 h-[2px] bg-shu mx-auto mb-8 rounded-full"></div>
+            
+            <h1 class="font-serif text-4xl sm:text-5xl font-semibold tracking-widest text-sumi mb-4">
+                宿 重富
+            </h1>
+            <p class="text-sm tracking-[0.25em] text-sumi/50 font-light">SHIGETOMI</p>
+            
+            <div class="w-12 h-[2px] bg-shu mx-auto mt-8 rounded-full"></div>
+        </div>
+
+        <!-- Language Selection -->
+        <div class="w-full max-w-sm fade-up" style="animation-delay: 0.08s;">
+            <p class="text-center text-sumi/50 text-sm mb-8 font-light tracking-wide">
+                言語をお選びください<br>
+                <span class="text-xs">Please select your language</span>
+            </p>
+            
+            <div class="grid grid-cols-1 gap-3">
+                <a href="form.html?lang=ja" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇯🇵</span>
+                    <span class="text-base font-medium">日本語</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=en" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇺🇸</span>
+                    <span class="text-base font-medium">English</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=ko" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇰🇷</span>
+                    <span class="text-base font-medium">한국어</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=zh-TW" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇹🇼</span>
+                    <span class="text-base font-medium">繁體中文</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=zh-CN" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇨🇳</span>
+                    <span class="text-base font-medium">简体中文</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=es" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm">
+                    <span class="text-2xl">🇪🇸</span>
+                    <span class="text-base font-medium">Español</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 text-center fade-in" style="animation-delay: 0.6s;">
+            <p class="text-sumi/30 text-xs tracking-[0.2em]">宿 重富</p>
+        </footer>
+    </main>
+</body>
+</html>
