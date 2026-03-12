@@ -85,10 +85,31 @@ class CheckinForm {
     const sectionDesc = (texts.descriptions && texts.descriptions[sectionNum]) || texts.description || '';
     this.stepDesc.innerHTML = sectionDesc.replace(/\n/g, '<br>');
 
-    // 戻りリンクテキスト更新
-    const backLabels = { ja: '言語選択', en: 'Language', ko: '언어 선택', 'zh-TW': '語言選擇', 'zh-CN': '语言选择', es: 'Idioma' };
+    // 戻りリンク更新（ステップ1→言語選択、それ以外→前セクション）
+    const backLink = document.getElementById('back-link');
     const backLinkText = document.getElementById('back-link-text');
-    if (backLinkText) backLinkText.textContent = backLabels[this.currentLang] || 'Language';
+    if (backLink && backLinkText) {
+      // 既存のクリックハンドラを解除するためcloneで置換
+      const newBackLink = backLink.cloneNode(true);
+      backLink.parentNode.replaceChild(newBackLink, backLink);
+      const newText = newBackLink.querySelector('#back-link-text');
+
+      if (this.currentStep === 0) {
+        // ステップ1: 言語選択に戻る
+        const backLabels = { ja: '言語選択', en: 'Language', ko: '언어 선택', 'zh-TW': '語言選擇', 'zh-CN': '语言选择', es: 'Idioma' };
+        newBackLink.href = 'index.html';
+        newText.textContent = backLabels[this.currentLang] || 'Language';
+      } else {
+        // ステップ2以降: 前のセクションに戻る
+        newBackLink.href = '#';
+        newBackLink.addEventListener('click', (e) => { e.preventDefault(); this.goToPrev(); });
+        // 前セクション名を表示
+        let prevStep = this.currentStep - 1;
+        while (prevStep >= 0 && this.shouldSkipStep(this.steps[prevStep])) prevStep--;
+        const prevSectionName = prevStep >= 0 ? texts.sections[this.steps[prevStep]] : '';
+        newText.textContent = prevSectionName;
+      }
+    }
 
     // ステッパー更新
     this.renderStepper(texts);
