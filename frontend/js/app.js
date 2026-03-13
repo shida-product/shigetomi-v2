@@ -4,7 +4,7 @@ class CheckinForm {
   constructor() {
     this.currentLang = this.getLangFromUrl() || 'ja';
     this.answers = {};
-    this.currentStep = 0;
+    this.currentStep = -1;  // -1 = イントロページ
     this.steps = [];      // 表示するセクション番号の配列
     this.direction = 1;   // 1=次へ, -1=戻る (アニメーション方向)
     
@@ -77,12 +77,20 @@ class CheckinForm {
   // ========== ステップ描画 ==========
   renderStep() {
     const texts = CONFIG.i18n[this.currentLang];
+
+    // ========== イントロページ ==========
+    if (this.currentStep === -1) {
+      this.renderIntroPage(texts);
+      return;
+    }
+
     const sectionNum = this.currentSectionNum;
 
-    // ヘッダー更新
-    this.stepTitle.textContent = texts.sections[sectionNum];
+    // ヘッダー更新（セクション名は非表示、説明文のみ表示）
+    this.stepTitle.textContent = '';
+    this.stepTitle.style.display = 'none';
     // セクション別説明文を表示（descriptionsがあれば優先）
-    const sectionDesc = (texts.descriptions && texts.descriptions[sectionNum]) || texts.description || '';
+    const sectionDesc = (texts.descriptions && texts.descriptions[sectionNum] !== undefined) ? texts.descriptions[sectionNum] : (texts.description || '');
     this.stepDesc.innerHTML = sectionDesc.replace(/\n/g, '<br>');
 
     // 戻りリンク更新（ステップ1→言語選択、それ以外→前セクション）
@@ -153,6 +161,14 @@ class CheckinForm {
           label.appendChild(req);
         }
         fieldWrapper.appendChild(label);
+
+        // ヘルパーテキスト（フィールド別の補足説明）
+        if (texts.helpers && texts.helpers[field.id]) {
+          const helper = document.createElement('p');
+          helper.className = 'text-xs text-sumi/50 mb-2 leading-relaxed';
+          helper.textContent = texts.helpers[field.id];
+          fieldWrapper.appendChild(helper);
+        }
       }
 
       const inputEl = this.buildFieldInput(field, texts);
@@ -207,6 +223,17 @@ class CheckinForm {
   // ========== ステップ遷移 ==========
   goToNext() {
     const texts = CONFIG.i18n[this.currentLang];
+
+    // イントロページから最初のフォームステップへ
+    if (this.currentStep === -1) {
+      this.direction = 1;
+      this.currentStep = 0;
+      this.nextBtn.disabled = false;
+      this.nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      this.renderStep();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     // 現在のステップのバリデーション
     if (!this.validateCurrentStep()) return;
@@ -417,6 +444,7 @@ class CheckinForm {
       const fileInput = document.createElement('input');
       fileInput.type = 'file'; fileInput.id = field.id;
       fileInput.accept = field.accept || 'image/*';
+      if (field.capture) fileInput.setAttribute('capture', field.capture);
       fileInput.className = 'hidden';
 
       const dropZone = document.createElement('label');
@@ -767,6 +795,113 @@ class CheckinForm {
 
   handleInput(fieldId, value) {
     this.answers[fieldId] = value;
+  }
+
+  // ========== イントロページ描画 ==========
+  renderIntroPage(texts) {
+    const intro = texts.intro;
+    if (!intro) {
+      // introがない言語はスキップしてフォームへ
+      this.currentStep = 0;
+      this.renderStep();
+      return;
+    }
+
+    // ステッパー非表示
+    this.stepperContainer.innerHTML = '';
+
+    // ヘッダー非表示
+    this.stepTitle.textContent = '';
+    this.stepTitle.style.display = 'none';
+    this.stepDesc.innerHTML = '';
+
+    // 戻るリンク = 言語選択へ
+    const backLink = document.getElementById('back-link');
+    const backLinkText = document.getElementById('back-link-text');
+    if (backLink && backLinkText) {
+      const newBackLink = backLink.cloneNode(true);
+      backLink.parentNode.replaceChild(newBackLink, backLink);
+      const newText = newBackLink.querySelector('#back-link-text');
+      const backLabels = { ja: '言語選択', en: 'Language', ko: '언어 선택', 'zh-TW': '語言選擇', 'zh-CN': '语言选择', es: 'Idioma' };
+      newBackLink.href = 'index.html';
+      newText.textContent = backLabels[this.currentLang] || 'Language';
+    }
+
+    // フィールドエリアにイントロコンテンツを描画
+    this.fieldsArea.innerHTML = '';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'space-y-6 fade-up';
+
+    // メイン説明文
+    const mainP = document.createElement('p');
+    mainP.className = 'text-sm text-sumi/70 leading-relaxed';
+    mainP.innerHTML = intro.main.replace(/\n/g, '<br>');
+    wrapper.appendChild(mainP);
+
+    // 登録内容（新たに追加）
+    if (intro.content) {
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'bg-kinu/50 border border-sumi/[0.08] shadow-sm rounded-xl p-5 md:p-6';
+      const contentP = document.createElement('p');
+      contentP.className = 'text-sm text-sumi/80 leading-relaxed whitespace-pre-line';
+      contentP.textContent = intro.content;
+      contentDiv.appendChild(contentP);
+      wrapper.appendChild(contentDiv);
+    }
+
+    // 外国人向けセクション
+    const foreignDiv = document.createElement('div');
+    foreignDiv.className = 'bg-kinu/50 border border-sumi/[0.08] shadow-sm rounded-xl p-5 md:p-6';
+    const foreignP = document.createElement('p');
+    foreignP.className = 'text-xs text-sumi/60 leading-relaxed whitespace-pre-line';
+    foreignP.textContent = intro.foreign;
+    foreignDiv.appendChild(foreignP);
+    wrapper.appendChild(foreignDiv);
+
+    // 区切り線
+    const hr = document.createElement('div');
+    hr.className = 'border-t border-sumi/[0.08] my-6';
+    wrapper.appendChild(hr);
+
+    // 所要時間（ここで一番下に追加）
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'flex items-center justify-center gap-2 text-sm font-medium text-sumi/80 bg-kinu/80 border border-sumi/[0.08] shadow-sm rounded-xl px-5 py-3 mb-6 mx-auto w-fit';
+    timeDiv.innerHTML = `<svg class="w-4 h-4 text-shu flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>${intro.time}</span>`;
+    wrapper.appendChild(timeDiv);
+
+    // 同意チェックボックス
+    const agreeRow = document.createElement('div');
+    agreeRow.className = 'flex items-center justify-center gap-3';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.id = 'intro-agree';
+    cb.className = 'custom-checkbox flex-shrink-0';
+    const cbLabel = document.createElement('label');
+    cbLabel.setAttribute('for', 'intro-agree');
+    cbLabel.className = 'text-sm text-sumi/80 font-medium cursor-pointer';
+    cbLabel.textContent = intro.agree;
+    agreeRow.appendChild(cb);
+    agreeRow.appendChild(cbLabel);
+    wrapper.appendChild(agreeRow);
+
+    this.fieldsArea.appendChild(wrapper);
+
+    // ナビゲーションボタン
+    this.prevBtn.style.display = 'none';
+    this.nextText.textContent = intro.start;
+    this.nextArrow.classList.remove('hidden');
+    this.nextBtn.disabled = true;
+    this.nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+    // チェックボックスでボタン活性化
+    cb.addEventListener('change', () => {
+      this.nextBtn.disabled = !cb.checked;
+      if (cb.checked) {
+        this.nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        this.nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    });
   }
 
   setupEventListeners() {

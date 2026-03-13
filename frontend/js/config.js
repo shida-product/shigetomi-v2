@@ -110,6 +110,7 @@ export const CONFIG = {
       required: true,
       section: 3,
       accept: 'image/*',
+      capture: 'environment',
       condition: (answers) => answers.has_domestic_address === 'no'
     },
     {
@@ -156,14 +157,22 @@ export const CONFIG = {
   i18n: {
     ja: {
       title: "チェックイン情報登録",
-      description: "当施設は旅館業法に基づき、すべての宿泊者様へ情報登録をお願いしております。",
+      description: "",
+      intro: {
+        main: "旅館業法に基づき、宿泊者名簿作成のため\nすべてのお客様に宿泊者情報の登録をお願いしております。\n\nご提供いただいた情報は法令に従い適切に管理し、3年間保存いたします。",
+        content: "【ご登録いただく内容】\n・氏名、連絡先\n・ご住所\n・滞在日程\n・簡単なアンケート",
+        time: "所要時間：約3分",
+        foreign: "【日本国内に住所をお持ちでない方へ】\n旅館業法施行規則第4条の2に基づき、\n以下の情報のご提供をお願いしております。\n・国籍\n・旅券（パスポート）番号\n・旅券の写し（顔写真ページ）\n\n※パスポートをお手元にご用意ください。",
+        agree: "上記の内容を確認しました",
+        start: "チェックインを始める"
+      },
       descriptions: {
-        1: "旅館業法の規定により、すべてのお客様の情報を宿泊者名簿に記載し、3年間保存する義務がございます。\n公的な身分証明書またはパスポートに記載の氏名を正確にご入力ください。",
-        2: "旅館業法に基づき、ご宿泊者様の住所の記載が必要です。\n日本国内にお住まいの方は日本の住所を、日本国外にお住まいの方は本国の住所をご記入ください。",
-        3: "旅館業法施行規則第4条の2に基づき、日本国内に住所を有しない外国人のお客様には以下の情報のご提供をお願いしております。\nご提供いただいた旅券の写しは、宿泊者名簿とともに3年間保存いたします。",
-        4: "ご到着・ご出発の予定日時をご記入ください。\nチェックイン: 15:00以降 ／ チェックアウト: 10:00まで\n※上記時間外をご希望の場合は、事前にお電話にてご連絡ください。",
+        1: "",
+        2: "",
+        3: "",
+        4: "チェックイン: 15:00〜 ／ チェックアウト: 〜10:00",
         5: "【宿泊約款・利用規約のご確認】\nご宿泊にあたり、当施設のハウスマニュアルをご確認ください。\n▼ ハウスマニュアル: [Link URL]\n\n【重要】\n★ 館内は全面禁煙です。喫煙は庭でお願いします。\n★ 住宅街のため、騒音にはくれぐれもご注意ください。\n\n内容をご確認の上、同意いただける場合は「はい」を選択してください。\n※同意いただけない場合はご宿泊いただけません。",
-        6: "今後のサービス向上および運営改善の参考とさせていただきます。"
+        6: ""
       },
       sections: {
         1: "基本情報",
@@ -213,6 +222,10 @@ export const CONFIG = {
         homecoming: "帰省",
         other: "その他"
       },
+      helpers: {
+        full_name: "公的な身分証明書またはパスポートに記載の氏名を正確にご入力ください。",
+        phone_number: "滞在中に連絡が取れる番号をご入力ください。"
+      },
       placeholders: {
         full_name: "例：重富 太郎",
         furigana: "例：しげとみ たろう",
@@ -221,6 +234,7 @@ export const CONFIG = {
         street: "例：1-2-3",
         building: "例：○○マンション 101号室",
         foreign_address: "本国（普段お住まいの国）の住所をご記入ください",
+        nationality: "国名を入力して検索",
         other: "その他の理由"
       },
       buttons: {
@@ -237,14 +251,22 @@ export const CONFIG = {
     },
     en: {
       title: "Check-in Information",
-      description: "Under the Inns and Hotels Act of Japan, we require all guests to register their information.",
+      description: "",
+      intro: {
+        main: "Under Japan's Inn Business Act, we are required to register\nall guests' information in a guest register.\n\nYour information will be managed appropriately in accordance with the law and retained for three years.",
+        content: "[Information to Register]\n- Name, Contact Info\n- Address\n- Stay Schedule\n- Brief Questionnaire",
+        time: "Estimated time: approx. 3 minutes",
+        foreign: "[For guests without a Japanese address]\nUnder Article 4-2 of the Enforcement Regulations of Japan's Inn Business Act,\nyou will be asked to provide:\n- Nationality\n- Passport number\n- A copy of your passport (photo page)\n\n*Please have your passport ready.",
+        agree: "I have read and understood the above",
+        start: "Start Check-in"
+      },
       descriptions: {
-        1: "Our facility is required by law to record all guests' information in a guest register and retain it for three years.\nPlease enter your name exactly as it appears on your passport or official identification document.",
-        2: "Under Japan's Inn Business Act, we are required to record guests' addresses.\nResidents of Japan: please enter your Japanese address. Residents outside Japan: please enter your home country address.",
-        3: "Under Article 4-2 of the Enforcement Regulations of Japan's Inn Business Act, foreign guests without an address in Japan are required to provide the following information.\nYour passport copy will be stored alongside the guest register for three years.",
-        4: "Please enter your planned arrival and departure dates and times.\nCheck-in: From 3:00 PM \/ Check-out: By 10:00 AM\n*If you wish to check in or out outside these hours, please contact us by phone in advance.*",
+        1: "",
+        2: "",
+        3: "",
+        4: "Check-in: From 3:00 PM / Check-out: By 10:00 AM",
         5: "[Review of Accommodation Agreement & House Rules]\nPlease review our House Manual before your stay.\n▼ House Manual: [Link URL]\n\n[IMPORTANT]\n★ The entire facility is non-smoking. Please smoke in the garden only.\n★ As we are in a residential area, please keep noise to a minimum.\n\nPlease select 'Yes' if you agree to the above.\n*If you do not agree, we may not be able to accommodate your stay.*",
-        6: "Your responses will help us improve our services and operations going forward."
+        6: ""
       },
       sections: {
         1: "Basic Information",
@@ -293,6 +315,10 @@ export const CONFIG = {
         homecoming: "Homecoming",
         other: "Other"
       },
+      helpers: {
+        full_name: "Please enter your name exactly as it appears on your passport or official ID.",
+        phone_number: "Please enter a number where you can be reached during your stay."
+      },
       placeholders: {
         full_name: "e.g., John Doe",
         phone_number: "+1 234 567 8900",
@@ -300,6 +326,7 @@ export const CONFIG = {
         street: "e.g., 1-2-3",
         building: "e.g., Apt 101",
         foreign_address: "Please enter your full home country address",
+        nationality: "Search country name",
         other: "Please specify"
       },
       buttons: {
@@ -316,14 +343,22 @@ export const CONFIG = {
     },
     ko: {
       title: "체크인 정보 등록",
-      description: "일본 여관업법에 따라 모든 숙박객의 정보 등록이 필요합니다.",
+      description: "",
+      intro: {
+        main: "일본 여관업법에 따라 숙박자 명부 작성을 위해\n모든 고객님의 숙박자 정보 등록을 부탁드립니다.\n\n제공하신 정보는 법령에 따라 적절히 관리되며 3년간 보존됩니다.",
+        content: "【등록하실 내용】\n・성명, 연락처\n・주소\n・체류 일정\n・간단한 설문조사",
+        time: "소요 시간: 약 3분",
+        foreign: "【일본 국내에 주소가 없으신 분께】\n여관업법 시행규칙 제4조의2에 따라\n다음 정보의 제공을 부탁드립니다.\n・국적\n・여권 번호\n・여권 사본 (사진 페이지)\n\n※여권을 준비해 주십시오.",
+        agree: "위 내용을 확인했습니다",
+        start: "체크인 시작"
+      },
       descriptions: {
-        1: "여관업법에 따라 모든 고객님의 정보를 숙박자 명부에 기재하고 3년간 보존할 의무가 있습니다.\n여권 또는 공식 신분증에 기재된 이름과 정확히 일치하도록 입력해 주십시오.",
-        2: "여관업법에 따라 숙박 고객님의 주소 기재가 필요합니다.\n일본 국내 거주자는 일본 주소를, 비거주자는 본국 주소를 기입해 주십시오.",
-        3: "여관업법 시행규칙 제4조의2에 따라, 일본 국내에 주소를 보유하지 않은 외국인 고객님께서는 아래 정보를 제공하셔야 합니다.\n제출하신 여권 사본은 숙박자 명부와 함께 3년간 보존됩니다.",
-        4: "도착 및 출발 예정 일시를 기입해 주십시오.\n체크인: 오후 3:00 이후 \/ 체크아웃: 오전 10:00까지\n*위 시간 외 체크인\/체크아웃을 희망하시는 경우, 사전에 전화로 문의해 주십시오.*",
+        1: "",
+        2: "",
+        3: "",
+        4: "체크인: 오후 3:00 이후 / 체크아웃: 오전 10:00까지",
         5: "[숙박 약관 및 이용 규정 확인]\n숙박 전 당 시설의 하우스 매뉴얼을 확인해 주십시오.\n▼ 하우스 매뉴얼: [Link URL]\n\n【중요】\n★ 관내 전면 금연입니다. 흡연은 정원에서 부탁드립니다.\n★ 주택가에 위치하고 있으므로 소음에 주의해 주십시오.\n\n내용을 확인하신 후 동의하시면 '예'를 선택해 주십시오.\n※ 동의하지 않으시는 경우 숙박이 불가합니다.",
-        6: "향후 서비스 개선 및 운영 향상을 위한 참고 자료로 활용됩니다."
+        6: ""
       },
       sections: {
         1: "기본 정보",
@@ -372,6 +407,10 @@ export const CONFIG = {
         homecoming: "귀성",
         other: "기타"
       },
+      helpers: {
+        full_name: "여권 또는 공식 신분증에 기재된 이름과 정확히 일치하도록 입력해 주십시오.",
+        phone_number: "체류 중 연락 가능한 번호를 입력해 주십시오."
+      },
       placeholders: {
         full_name: "예: 홍길동",
         phone_number: "예: 010-1234-5678",
@@ -379,6 +418,7 @@ export const CONFIG = {
         street: "예: 1-2-3",
         building: "예: ○○맨션 101호",
         foreign_address: "본국 주소를 입력해 주십시오",
+        nationality: "국명을 입력하여 검색",
         other: "기타 사유"
       },
       buttons: {
@@ -394,16 +434,23 @@ export const CONFIG = {
       }
     },
     'zh-TW': {
-      // Taiwan / Traditional Chinese (Draft translated)
       title: "入住登記",
-      description: "根據日本旅館業法，所有住客皆需進行資訊登記。",
+      description: "",
+      intro: {
+        main: "根據日本旅館業法，為製作住宿者名簿，\n需要所有客人進行住宿者資訊登記。\n\n您提供的資訊將依法妥善管理，並保存三年。",
+        content: "【登記內容】\n・姓名、聯絡方式\n・住址\n・停留日程\n・簡單問卷調查",
+        time: "所需時間：約3分鐘",
+        foreign: "【在日本沒有住址的旅客】\n根據旅館業法施行規則第4條之2，\n需要提供以下資訊：\n・國籍\n・護照號碼\n・護照影本（照片頁）\n\n※請準備好您的護照。",
+        agree: "我已確認上述內容",
+        start: "開始入住登記"
+      },
       descriptions: {
-        1: "本設施根據旅館業法的規定，有義務將所有入住客人的資訊登記在住宿者名簿上並保存三年。\n請嚴格按照您的護照或官方身份證件上的姓名填寫。",
-        2: "根據《旅館業法》的規定，需要登記住宿者的地址。\n居住在日本的客人請填寫日本地址，非居住者請填寫本國地址。",
-        3: "根據《旅館業法施行規則》第4條之2的規定，在日本沒有地址的外國客人須提供以下資訊。\n您提交的護照影本將與住宿者名簿一同保存三年。",
-        4: "請填寫您計劃抵達和離開的日期和時間。\n入住時間：下午 3:00 起 \/ 退房時間：上午 10:00 前\n*如果您希望在上述時間以外辦理入住或退房，請提前致電聯繫。*",
+        1: "",
+        2: "",
+        3: "",
+        4: "入住：下午3:00起 ／ 退房：上午10:00前",
         5: "【住宿條款及使用規定確認】\n入住前請確認本設施的房屋手冊。\n▼ 房屋手冊: [Link URL]\n\n【重要】\n★ 館內全面禁煙，請於庭院吸煙。\n★ 本設施位於住宅區，請注意保持安靜。\n\n確認內容後，若同意請選擇「是」。\n※如不同意，將無法安排住宿。",
-        6: "您的回覆將有助於我們提升服務品質並改善未來的營運。"
+        6: ""
       },
       sections: { 1: "基本資料", 2: "居住地確認", 3: "外籍人士必填資料", 4: "停留日程", 5: "最終同意", 6: "簡單問卷調查" },
       stepperLabels: { 1: "基本資料", 2: "居住地", 3: "護照", 4: "日程", 5: "同意", 6: "問卷" },
@@ -418,21 +465,32 @@ export const CONFIG = {
         agree_terms: "您是否同意相關條款與協議？", visit_purposes: "請告知您此次入住的目的。（可複選）"
       },
       options: { yes: "是", no: "否", tourism: "觀光旅遊", business: "商務出差/工作", ceremony: "婚喪等家庭事務", school: "學校相關（研修、比賽、帶隊等）", homecoming: "探親/返鄉", other: "其他" },
+      helpers: {
+        full_name: "請嚴格按照您的護照或官方身份證件上的姓名填寫。",
+        phone_number: "請輸入住宿期間可聯繫的電話號碼。"
+      },
       placeholders: { full_name: "例：王小明", phone_number: "例：0912-345-678", postal_code: "例：810-0001", street: "例：1-2-3", building: "例：○○大厦 101號", foreign_address: "請輸入您本國的完整地址", other: "其他原因" },
       buttons: { submit: "送出", submitting: "送出中...", select_file: "選擇檔案" },
       messages: { success: "登記完成，感謝您的配合。", error_general: "發生錯誤，請重試。", error_file_large: "檔案過大，請上傳小於 5MB 的圖片。", agree_required: "必須同意條款才能繼續。" }
     },
     'zh-CN': {
-      // Simplified Chinese (Draft translated)
       title: "入住登记",
-      description: "根据日本旅馆业法，所有住客均需进行信息登记。",
+      description: "",
+      intro: {
+        main: "根据日本旅馆业法，为制作住宿者名簿，\n需要所有客人进行住宿者信息登记。\n\n您提供的信息将依法妥善管理，并保存三年。",
+        content: "【登记内容】\n・姓名、联系方式\n・住址\n・停留日程\n・简单问卷调查",
+        time: "所需时间：约3分钟",
+        foreign: "【在日本没有住址的旅客】\n根据旅馆业法施行规则第4条之2，\n需要提供以下信息：\n・国籍\n・护照号码\n・护照复印件（照片页）\n\n※请准备好您的护照。",
+        agree: "我已确认上述内容",
+        start: "开始入住登记"
+      },
       descriptions: {
-        1: "本设施根据旅馆业法的规定，有义务将所有入住客人的信息登记在住宿者名簿上并保存三年。\n请严格按照您的护照或官方身份证件上的姓名填写。",
-        2: "根据《旅馆业法》的规定，需要登记住宿者的地址。\n居住在日本的客人请填写日本地址，非居住者请填写本国地址。",
-        3: "根据《旅馆业法施行规则》第4条之2的规定，在日本没有地址的外国客人须提供以下信息。\n您提交的护照复印件将与住宿者名簿一同保存三年。",
-        4: "请填写您计划抵达和离开的日期和时间。\n入住时间：下午 3:00 起 \/ 退房时间：上午 10:00 前\n*如果您希望在上述时间以外办理入住或退房，请提前致电联系。*",
-        5: "【住宿条款及使用规定确認】\n入住前请确認本设施的房屋手册。\n▼ 房屋手册: [Link URL]\n\n【重要】\n★ 馆内全面禁烟，请于庭院吸烟。\n★ 本设施位于住宅区，请注意保持安静。\n\n确認内容后，若同意请选择「是」。\n※如不同意，将无法安排住宿。",
-        6: "您的回答将帮助我们提升服务质量并改善今后的运营。"
+        1: "",
+        2: "",
+        3: "",
+        4: "入住：下午3:00起 ／ 退房：上午10:00前",
+        5: "【住宿条款及使用规定确认】\n入住前请确认本设施的房屋手册。\n▼ 房屋手册: [Link URL]\n\n【重要】\n★ 馆内全面禁烟，请于庭院吸烟。\n★ 本设施位于住宅区，请注意保持安静。\n\n确认内容后，若同意请选择「是」。\n※如不同意，将无法安排住宿。",
+        6: ""
       },
       sections: { 1: "基本信息", 2: "居住地确认", 3: "外籍人士必填信息", 4: "停留日程", 5: "最终同意", 6: "简单问卷调查" },
       stepperLabels: { 1: "基本信息", 2: "居住地", 3: "护照", 4: "日程", 5: "同意", 6: "问卷" },
@@ -447,21 +505,32 @@ export const CONFIG = {
         agree_terms: "您是否同意相关条款与协议？", visit_purposes: "请告知您本次入住的目的。（可多选）"
       },
       options: { yes: "是", no: "否", tourism: "旅游观光", business: "商务出差/工作", ceremony: "婚丧等家庭事务", school: "学校相关（研修、比赛、带队等）", homecoming: "探亲/返乡", other: "其他" },
+      helpers: {
+        full_name: "请严格按照您的护照或官方身份证件上的姓名填写。",
+        phone_number: "请输入住宿期间可联系的电话号码。"
+      },
       placeholders: { full_name: "例：王小明", phone_number: "例：138-1234-5678", postal_code: "例：810-0001", street: "例：1-2-3", building: "例：○○大厦 101号", foreign_address: "请输入您本国的完整地址", other: "其他原因" },
       buttons: { submit: "提交", submitting: "提交中...", select_file: "选择文件" },
       messages: { success: "登记完成，感谢您的配合。", error_general: "发生错误，请重试。", error_file_large: "文件过大，请上传小于 5MB 的图片。", agree_required: "必须同意条款才能继续。" }
     },
     es: {
-      // Spanish (Draft translated)
       title: "Registro de Check-in",
-      description: "Según la Ley de Posadas y Hoteles de Japón, todos los huéspedes deben registrar su información.",
+      description: "",
+      intro: {
+        main: "De acuerdo con la Ley de Establecimientos de Alojamiento de Japón,\ntodos los huéspedes deben registrar su información.\n\nSu información será gestionada adecuadamente conforme a la ley y conservada durante tres años.",
+        content: "[Información a Registrar]\n- Nombre, Datos de contacto\n- Dirección\n- Fechas de estancia\n- Breve cuestionario",
+        time: "Tiempo estimado: aprox. 3 minutos",
+        foreign: "[Para huéspedes sin dirección en Japón]\nDe acuerdo con el Artículo 4-2 del Reglamento de Aplicación,\nse le solicitará proporcionar:\n・Nacionalidad\n・Número de pasaporte\n・Copia del pasaporte (página de datos)\n\n*Por favor, tenga su pasaporte preparado.",
+        agree: "He leído y comprendido lo anterior",
+        start: "Iniciar Check-in"
+      },
       descriptions: {
-        1: "Nuestro establecimiento está obligado por ley a registrar la información de todos los huéspedes en un libro de registro y conservarla durante tres años.\nPor favor, ingrese su nombre exactamente como aparece en su pasaporte o documento de identidad oficial.",
-        2: "De acuerdo con la Ley de Establecimientos de Alojamiento de Japón, es necesario registrar la dirección del huésped.\nResidentes en Japón: introduzcan su dirección japonesa. No residentes: introduzcan la dirección de su país de origen.",
-        3: "De acuerdo con el Artículo 4-2 del Reglamento de Aplicación, los huéspedes extranjeros sin dirección en Japón deben proporcionar la siguiente información.\nLa copia de su pasaporte se conservará junto con el registro de huéspedes durante tres años.",
-        4: "Por favor, introduzca las fechas y horas previstas de llegada y salida.\nCheck-in: A partir de las 15:00 \/ Check-out: Hasta las 10:00\n*Si desea realizar el check-in o check-out fuera de este horario, comuníquese con nosotros por teléfono.*",
+        1: "",
+        2: "",
+        3: "",
+        4: "Check-in: A partir de las 15:00 / Check-out: Hasta las 10:00",
         5: "[Revisión del Acuerdo de Alojamiento y Normas]\nPor favor, revise nuestro Manual de la Casa antes de su estancia.\n▼ Manual de la Casa: [Link URL]\n\n[IMPORTANTE]\n★ Está totalmente prohibido fumar en el interior. Por favor, fume solo en el jardín.\n★ Nos encontramos en una zona residencial. Le rogamos que mantenga el nivel de ruido al mínimo.\n\nSeleccione 'Sí' si está de acuerdo con lo anterior.\n*Si no está de acuerdo, es posible que no podamos alojarle.*",
-        6: "Sus respuestas nos ayudarán a mejorar nuestros servicios y operaciones en el futuro."
+        6: ""
       },
       sections: { 1: "Información Básica", 2: "Confirmación de Residencia", 3: "Información Requerida para Extranjeros", 4: "Horario de Estancia", 5: "Acuerdo Final", 6: "Breve Cuestionario" },
       stepperLabels: { 1: "Básico", 2: "Dirección", 3: "Pasaporte", 4: "Fechas", 5: "Acuerdo", 6: "Encuesta" },
@@ -476,6 +545,10 @@ export const CONFIG = {
         agree_terms: "¿Acepta los Términos y Condiciones?", visit_purposes: "¿Cuál es el motivo de su estancia? (Se permiten múltiples respuestas)"
       },
       options: { yes: "Sí", no: "No", tourism: "Turismo", business: "Negocios (viaje de trabajo/trabajo)", ceremony: "Evento familiar (boda, funeral, etc.)", school: "Actividad escolar (formación, competencia, etc.)", homecoming: "Visita a familiares/Regreso a casa", other: "Otro" },
+      helpers: {
+        full_name: "Por favor, ingrese su nombre exactamente como aparece en su pasaporte o documento de identidad oficial.",
+        phone_number: "Introduzca un número de contacto disponible durante su estancia."
+      },
       placeholders: { full_name: "Ej. Juan Pérez", phone_number: "+34 123 456 789", postal_code: "Ej. 810-0001", street: "Ej. 1-2-3", building: "Ej. Apt 101", foreign_address: "Introduzca su dirección completa de su país de origen", other: "Especifique" },
       buttons: { submit: "Enviar", submitting: "Enviando...", select_file: "Seleccionar Archivo" },
       messages: { success: "Información enviada con éxito. Gracias.", error_general: "Ocurrió un error. Por favor, inténtelo de nuevo.", error_file_large: "El archivo es demasiado grande. Seleccione una imagen de menos de 5MB.", agree_required: "Debe aceptar los términos para continuar." }

@@ -46,11 +46,13 @@
             animation: fadeIn 0.5s ease-out forwards;
         }
         .lang-card {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1), 0 1px 3px -1px rgba(0, 0, 0, 0.06);
         }
         .lang-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px -4px rgba(197, 61, 67, 0.15);
+            box-shadow: 0 8px 24px -4px rgba(197, 61, 67, 0.18), 0 4px 10px -2px rgba(0, 0, 0, 0.08);
         }
         .lang-card:active {
             transform: scale(0.98);
@@ -91,39 +93,37 @@
 
         <!-- Language Selection -->
         <div class="w-full max-w-sm fade-up" style="animation-delay: 0.08s;">
-            <p class="text-center text-sumi/50 text-sm mb-8 font-light tracking-wide">
-                言語をお選びください<br>
-                <span class="text-xs">Please select your language</span>
+            <p class="text-center text-sumi/60 text-sm mb-2 font-light tracking-wide leading-relaxed">
+                チェックイン用フォームの入力をお願いします<br>
+                言語を選択してください
+            </p>
+            <p class="text-center text-sumi/40 text-xs mb-8 font-light tracking-wide leading-relaxed">
+                Please fill out the check-in form<br>
+                Select your language
             </p>
             
             <div class="grid grid-cols-1 gap-3">
-                <a href="form.html?lang=ja" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">JA</span>
+                <a href="form.html?lang=ja" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
                     <span class="text-base font-medium">日本語</span>
                     <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
-                <a href="form.html?lang=en" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">EN</span>
-                    <span class="text-base font-medium">English</span>
-                    <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <a href="form.html?lang=ko" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">KO</span>
+                <a href="form.html?lang=ko" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
                     <span class="text-base font-medium">한국어</span>
                     <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
-                <a href="form.html?lang=zh-TW" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">TW</span>
+                <a href="form.html?lang=en" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
+                    <span class="text-base font-medium">English</span>
+                    <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a href="form.html?lang=zh-TW" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
                     <span class="text-base font-medium">繁體中文</span>
                     <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
-                <a href="form.html?lang=zh-CN" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">CN</span>
+                <a href="form.html?lang=zh-CN" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
                     <span class="text-base font-medium">简体中文</span>
                     <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
-                <a href="form.html?lang=es" class="lang-card fade-up flex items-center gap-4 px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-washi-dark/50 text-sumi/70 font-medium text-sm tracking-wider group-hover:bg-shu/10 group-hover:text-shu transition-colors">ES</span>
+                <a href="form.html?lang=es" class="lang-card fade-up flex items-center px-6 py-4 rounded-xl bg-white/70 border border-sumi/[0.06] hover:border-shu/30 hover:bg-white text-sumi no-underline shadow-sm group">
                     <span class="text-base font-medium">Español</span>
                     <svg class="ml-auto w-4 h-4 text-sumi/20 group-hover:text-shu/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
