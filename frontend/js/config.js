@@ -153,6 +153,9 @@ export const CONFIG = {
     }
   ],
 
+  // ハウスマニュアルURL
+  manual_url: "https://docs.google.com/document/d/1zGWJqoenrya7wmIegam7c45X5Dybyl7ns5CKR3Bs13A/edit?usp=sharing",
+
   // Localization Dictionary
   i18n: {
     ja: {
@@ -171,7 +174,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "チェックイン: 15:00〜 ／ チェックアウト: 〜10:00",
-        5: "【宿泊約款・利用規約のご確認】\nご宿泊にあたり、当施設のハウスマニュアルをご確認ください。\n▼ ハウスマニュアル: [Link URL]\n\n【重要】\n★ 館内は全面禁煙です。喫煙は庭でお願いします。\n★ 住宅街のため、騒音にはくれぐれもご注意ください。\n\n内容をご確認の上、同意いただける場合は「はい」を選択してください。\n※同意いただけない場合はご宿泊いただけません。",
+        5: "【宿泊約款・利用規約のご確認】\nご宿泊にあたり、当施設のハウスマニュアルをご確認ください。\n\n【重要】\n★ 館内は全面禁煙です。喫煙は庭でお願いします。\n★ 住宅街のため、騒音にはくれぐれもご注意ください。\n\n内容をご確認の上、同意いただける場合は「はい」を選択してください。\n※同意いただけない場合はご宿泊いただけません。",
         6: ""
       },
       sections: {
@@ -240,7 +243,11 @@ export const CONFIG = {
       buttons: {
         submit: "送信する",
         submitting: "送信中...",
-        select_file: "ファイルを選択"
+        select_file: "ファイルを選択",
+        capture_photo: "タップしてパスポートを撮影",
+        photo_done: "撮影完了",
+        manual_button: "ハウスマニュアルを確認する",
+        manual_opened: "確認済み"
       },
       messages: {
         success: "チェックイン情報の登録が完了しました。ありがとうございます。",
@@ -265,7 +272,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "Check-in: From 3:00 PM / Check-out: By 10:00 AM",
-        5: "[Review of Accommodation Agreement & House Rules]\nPlease review our House Manual before your stay.\n▼ House Manual: [Link URL]\n\n[IMPORTANT]\n★ The entire facility is non-smoking. Please smoke in the garden only.\n★ As we are in a residential area, please keep noise to a minimum.\n\nPlease select 'Yes' if you agree to the above.\n*If you do not agree, we may not be able to accommodate your stay.*",
+        5: "[Review of Accommodation Agreement & House Rules]\nPlease review our House Manual before your stay.\n\n[IMPORTANT]\n★ The entire facility is non-smoking. Please smoke in the garden only.\n★ As we are in a residential area, please keep noise to a minimum.\n\nPlease select 'Yes' if you agree to the above.\n*If you do not agree, we may not be able to accommodate your stay.*",
         6: ""
       },
       sections: {
@@ -332,7 +339,11 @@ export const CONFIG = {
       buttons: {
         submit: "Submit",
         submitting: "Submitting...",
-        select_file: "Select File"
+        select_file: "Select File",
+        capture_photo: "Tap to photograph your passport",
+        photo_done: "Photo captured",
+        manual_button: "View House Manual",
+        manual_opened: "Viewed"
       },
       messages: {
         success: "Check-in information submitted successfully. Thank you.",
@@ -357,7 +368,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "체크인: 오후 3:00 이후 / 체크아웃: 오전 10:00까지",
-        5: "[숙박 약관 및 이용 규정 확인]\n숙박 전 당 시설의 하우스 매뉴얼을 확인해 주십시오.\n▼ 하우스 매뉴얼: [Link URL]\n\n【중요】\n★ 관내 전면 금연입니다. 흡연은 정원에서 부탁드립니다.\n★ 주택가에 위치하고 있으므로 소음에 주의해 주십시오.\n\n내용을 확인하신 후 동의하시면 '예'를 선택해 주십시오.\n※ 동의하지 않으시는 경우 숙박이 불가합니다.",
+        5: "[숙박 약관 및 이용 규정 확인]\n숙박 전 당 시설의 하우스 매뉴얼을 확인해 주십시오.\n\n【중요】\n★ 관내 전면 금연입니다. 흡연은 정원에서 부탁드립니다.\n★ 주택가에 위치하고 있으므로 소음에 주의해 주십시오.\n\n내용을 확인하신 후 동의하시면 '예'를 선택해 주십시오.\n※ 동의하지 않으시는 경우 숙박이 불가합니다.",
         6: ""
       },
       sections: {
@@ -424,7 +435,11 @@ export const CONFIG = {
       buttons: {
         submit: "제출하기",
         submitting: "제출 중...",
-        select_file: "파일 선택"
+        select_file: "파일 선택",
+        capture_photo: "탭하여 여권을 촬영",
+        photo_done: "촬영 완료",
+        manual_button: "하우스 매뉴얼 확인",
+        manual_opened: "확인 완료"
       },
       messages: {
         success: "체크인 정보 등록이 완료되었습니다. 감사합니다.",
@@ -449,7 +464,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "入住：下午3:00起 ／ 退房：上午10:00前",
-        5: "【住宿條款及使用規定確認】\n入住前請確認本設施的房屋手冊。\n▼ 房屋手冊: [Link URL]\n\n【重要】\n★ 館內全面禁煙，請於庭院吸煙。\n★ 本設施位於住宅區，請注意保持安靜。\n\n確認內容後，若同意請選擇「是」。\n※如不同意，將無法安排住宿。",
+        5: "【住宿條款及使用規定確認】\n入住前請確認本設施的房屋手冊。\n\n【重要】\n★ 館內全面禁煙，請於庭院吸煙。\n★ 本設施位於住宅區，請注意保持安靜。\n\n確認內容後，若同意請選擇「是」。\n※如不同意，將無法安排住宿。",
         6: ""
       },
       sections: { 1: "基本資料", 2: "居住地確認", 3: "外籍人士必填資料", 4: "停留日程", 5: "最終同意", 6: "簡單問卷調查" },
@@ -470,7 +485,7 @@ export const CONFIG = {
         phone_number: "請輸入住宿期間可聯繫的電話號碼。"
       },
       placeholders: { full_name: "例：王小明", phone_number: "例：0912-345-678", postal_code: "例：810-0001", street: "例：1-2-3", building: "例：○○大厦 101號", foreign_address: "請輸入您本國的完整地址", other: "其他原因" },
-      buttons: { submit: "送出", submitting: "送出中...", select_file: "選擇檔案" },
+      buttons: { submit: "送出", submitting: "送出中...", select_file: "選擇檔案", capture_photo: "點擊拍攝護照", photo_done: "拍攝完成", manual_button: "查看房屋手冊", manual_opened: "已查看" },
       messages: { success: "登記完成，感謝您的配合。", error_general: "發生錯誤，請重試。", error_file_large: "檔案過大，請上傳小於 5MB 的圖片。", agree_required: "必須同意條款才能繼續。" }
     },
     'zh-CN': {
@@ -489,7 +504,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "入住：下午3:00起 ／ 退房：上午10:00前",
-        5: "【住宿条款及使用规定确认】\n入住前请确认本设施的房屋手册。\n▼ 房屋手册: [Link URL]\n\n【重要】\n★ 馆内全面禁烟，请于庭院吸烟。\n★ 本设施位于住宅区，请注意保持安静。\n\n确认内容后，若同意请选择「是」。\n※如不同意，将无法安排住宿。",
+        5: "【住宿条款及使用规定确认】\n入住前请确认本设施的房屋手册。\n\n【重要】\n★ 馆内全面禁烟，请于庭院吸烟。\n★ 本设施位于住宅区，请注意保持安静。\n\n确认内容后，若同意请选择「是」。\n※如不同意，将无法安排住宿。",
         6: ""
       },
       sections: { 1: "基本信息", 2: "居住地确认", 3: "外籍人士必填信息", 4: "停留日程", 5: "最终同意", 6: "简单问卷调查" },
@@ -510,7 +525,7 @@ export const CONFIG = {
         phone_number: "请输入住宿期间可联系的电话号码。"
       },
       placeholders: { full_name: "例：王小明", phone_number: "例：138-1234-5678", postal_code: "例：810-0001", street: "例：1-2-3", building: "例：○○大厦 101号", foreign_address: "请输入您本国的完整地址", other: "其他原因" },
-      buttons: { submit: "提交", submitting: "提交中...", select_file: "选择文件" },
+      buttons: { submit: "提交", submitting: "提交中...", select_file: "选择文件", capture_photo: "点击拍摄护照", photo_done: "拍摄完成", manual_button: "查看房屋手册", manual_opened: "已查看" },
       messages: { success: "登记完成，感谢您的配合。", error_general: "发生错误，请重试。", error_file_large: "文件过大，请上传小于 5MB 的图片。", agree_required: "必须同意条款才能继续。" }
     },
     es: {
@@ -529,7 +544,7 @@ export const CONFIG = {
         2: "",
         3: "",
         4: "Check-in: A partir de las 15:00 / Check-out: Hasta las 10:00",
-        5: "[Revisión del Acuerdo de Alojamiento y Normas]\nPor favor, revise nuestro Manual de la Casa antes de su estancia.\n▼ Manual de la Casa: [Link URL]\n\n[IMPORTANTE]\n★ Está totalmente prohibido fumar en el interior. Por favor, fume solo en el jardín.\n★ Nos encontramos en una zona residencial. Le rogamos que mantenga el nivel de ruido al mínimo.\n\nSeleccione 'Sí' si está de acuerdo con lo anterior.\n*Si no está de acuerdo, es posible que no podamos alojarle.*",
+        5: "[Revisión del Acuerdo de Alojamiento y Normas]\nPor favor, revise nuestro Manual de la Casa antes de su estancia.\n\n[IMPORTANTE]\n★ Está totalmente prohibido fumar en el interior. Por favor, fume solo en el jardín.\n★ Nos encontramos en una zona residencial. Le rogamos que mantenga el nivel de ruido al mínimo.\n\nSeleccione 'Sí' si está de acuerdo con lo anterior.\n*Si no está de acuerdo, es posible que no podamos alojarle.*",
         6: ""
       },
       sections: { 1: "Información Básica", 2: "Confirmación de Residencia", 3: "Información Requerida para Extranjeros", 4: "Horario de Estancia", 5: "Acuerdo Final", 6: "Breve Cuestionario" },
@@ -550,7 +565,7 @@ export const CONFIG = {
         phone_number: "Introduzca un número de contacto disponible durante su estancia."
       },
       placeholders: { full_name: "Ej. Juan Pérez", phone_number: "+34 123 456 789", postal_code: "Ej. 810-0001", street: "Ej. 1-2-3", building: "Ej. Apt 101", foreign_address: "Introduzca su dirección completa de su país de origen", other: "Especifique" },
-      buttons: { submit: "Enviar", submitting: "Enviando...", select_file: "Seleccionar Archivo" },
+      buttons: { submit: "Enviar", submitting: "Enviando...", select_file: "Seleccionar Archivo", capture_photo: "Toque para fotografiar su pasaporte", photo_done: "Foto capturada", manual_button: "Ver Manual de la Casa", manual_opened: "Visto" },
       messages: { success: "Información enviada con éxito. Gracias.", error_general: "Ocurrió un error. Por favor, inténtelo de nuevo.", error_file_large: "El archivo es demasiado grande. Seleccione una imagen de menos de 5MB.", agree_required: "Debe aceptar los términos para continuar." }
     }
   }

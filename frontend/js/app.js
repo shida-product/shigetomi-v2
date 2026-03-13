@@ -91,7 +91,67 @@ class CheckinForm {
     this.stepTitle.style.display = 'none';
     // セクション別説明文を表示（descriptionsがあれば優先）
     const sectionDesc = (texts.descriptions && texts.descriptions[sectionNum] !== undefined) ? texts.descriptions[sectionNum] : (texts.description || '');
-    this.stepDesc.innerHTML = sectionDesc.replace(/\n/g, '<br>');
+
+    // セクション5: 【重要】の前にマニュアルボタンを挿入
+    if (sectionNum === 5 && CONFIG.manual_url) {
+      // 重要マーカーで分割
+      const importantMarkers = ['【重要】', '[IMPORTANT]', '[IMPORTANTE]', '【중요】'];
+      let beforeImportant = sectionDesc;
+      let afterImportant = '';
+      for (const marker of importantMarkers) {
+        const idx = sectionDesc.indexOf(marker);
+        if (idx !== -1) {
+          beforeImportant = sectionDesc.substring(0, idx);
+          afterImportant = sectionDesc.substring(idx);
+          break;
+        }
+      }
+
+      // 前半テキスト
+      const beforeDiv = document.createElement('div');
+      beforeDiv.innerHTML = beforeImportant.replace(/\n/g, '<br>');
+      this.stepDesc.innerHTML = '';
+      this.stepDesc.appendChild(beforeDiv);
+
+      // マニュアルボタン（中央揃え）
+      const manualBtnWrapper = document.createElement('div');
+      manualBtnWrapper.className = 'flex justify-center my-5';
+
+      const manualBtn = document.createElement('a');
+      manualBtn.href = CONFIG.manual_url;
+      manualBtn.target = '_blank';
+      manualBtn.rel = 'noopener noreferrer';
+      manualBtn.className = 'inline-flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-shu/80 text-shu font-medium text-sm transition-all hover:bg-shu/5 active:scale-95';
+      manualBtn.innerHTML = `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span>${texts.buttons.manual_button || 'View House Manual'}</span><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>`;
+
+      if (this._manualOpened) {
+        manualBtn.classList.remove('border-shu/80', 'text-shu');
+        manualBtn.classList.add('border-green-500', 'text-green-700', 'bg-green-50');
+        const label = manualBtn.querySelector('span');
+        if (label) label.textContent = `✓ ${texts.buttons.manual_opened || 'Viewed'}`;
+      }
+
+      manualBtn.addEventListener('click', () => {
+        this._manualOpened = true;
+        manualBtn.classList.remove('border-shu/80', 'text-shu');
+        manualBtn.classList.add('border-green-500', 'text-green-700', 'bg-green-50');
+        const label = manualBtn.querySelector('span');
+        if (label) label.textContent = `✓ ${texts.buttons.manual_opened || 'Viewed'}`;
+        this.enableAgreeField();
+      });
+
+      manualBtnWrapper.appendChild(manualBtn);
+      this.stepDesc.appendChild(manualBtnWrapper);
+
+      // 後半テキスト（【重要】以降）
+      if (afterImportant) {
+        const afterDiv = document.createElement('div');
+        afterDiv.innerHTML = afterImportant.replace(/\n/g, '<br>');
+        this.stepDesc.appendChild(afterDiv);
+      }
+    } else {
+      this.stepDesc.innerHTML = sectionDesc.replace(/\n/g, '<br>');
+    }
 
     // 戻りリンク更新（ステップ1→言語選択、それ以外→前セクション）
     const backLink = document.getElementById('back-link');
@@ -177,6 +237,15 @@ class CheckinForm {
     });
 
     this.fieldsArea.appendChild(fieldsWrapper);
+
+    // セクション5: マニュアル未閲覧ならagree_termsを無効化
+    if (sectionNum === 5 && CONFIG.manual_url && !this._manualOpened) {
+      const agreeWrapper = document.getElementById('field-wrapper-agree_terms');
+      if (agreeWrapper) {
+        agreeWrapper.style.opacity = '0.4';
+        agreeWrapper.style.pointerEvents = 'none';
+      }
+    }
 
     // ナビゲーションボタン更新
     this.updateNavButtons(texts);
@@ -451,26 +520,32 @@ class CheckinForm {
       dropZone.setAttribute('for', field.id);
       dropZone.className = 'upload-zone' + (this.answers[field.id] ? ' selected' : '');
 
+      const isCapture = !!field.capture;
+      const cameraIcon = '<svg class="h-10 w-10 text-sumi/30 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
+      const uploadIcon = '<svg class="h-10 w-10 text-sumi/30 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const doneIcon = '<svg class="h-10 w-10 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+
+      const defaultLabel = isCapture ? (texts.buttons.capture_photo || texts.buttons.select_file) : texts.buttons.select_file;
+      const doneLabel = isCapture ? (texts.buttons.photo_done || 'Done') : 'Image selected';
+
       const icon = document.createElement('div');
-      icon.innerHTML = this.answers[field.id]
-        ? '<svg class="h-10 w-10 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
-        : '<svg class="h-10 w-10 text-sumi/30 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      icon.innerHTML = this.answers[field.id] ? doneIcon : (isCapture ? cameraIcon : uploadIcon);
 
       const textSpan = document.createElement('span');
       textSpan.className = 'text-sm font-medium ' + (this.answers[field.id] ? 'text-green-700' : 'text-sumi/60');
-      textSpan.textContent = this.answers[field.id] ? (this.answers[field.id].name || 'Image selected') : texts.buttons.select_file;
+      textSpan.textContent = this.answers[field.id] ? (this.answers[field.id].name || doneLabel) : defaultLabel;
 
       const hintSpan = document.createElement('span');
       hintSpan.className = 'text-xs text-sumi/30 mt-1';
-      hintSpan.textContent = this.answers[field.id] ? '' : 'JPEG, PNG (max 5MB)';
+      hintSpan.textContent = this.answers[field.id] ? '' : (isCapture ? 'max 5MB' : 'JPEG, PNG (max 5MB)');
 
       fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
           this.handleInput(field.id, file);
-          textSpan.textContent = file.name;
+          textSpan.textContent = isCapture ? (texts.buttons.photo_done || 'Done') : file.name;
           textSpan.className = 'text-sm font-medium text-green-700';
-          icon.innerHTML = '<svg class="h-10 w-10 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+          icon.innerHTML = doneIcon;
           dropZone.classList.add('selected');
           hintSpan.textContent = '';
         }
@@ -633,7 +708,17 @@ class CheckinForm {
         if (field.id === 'departure_time' && h === 10 && m > 0) continue;
         const hh = String(h).padStart(2, '0');
         const mm = String(m).padStart(2, '0');
-        timeOptions.push({ value: `${hh}:${mm}`, label: `${hh}:${mm}` });
+        const value = `${hh}:${mm}`;
+        // 日本語は24時間表記、それ以外はAM/PM
+        let label;
+        if (this.currentLang === 'ja') {
+          label = value;
+        } else {
+          const h12 = h % 12 || 12;
+          const ampm = h < 12 ? 'AM' : 'PM';
+          label = `${h12}:${mm} ${ampm}`;
+        }
+        timeOptions.push({ value, label });
       }
     }
 
@@ -654,6 +739,15 @@ class CheckinForm {
     });
 
     return wrapper;
+  }
+
+  // ========== ハウスマニュアル閲覧後のagree_terms有効化 ==========
+  enableAgreeField() {
+    const agreeWrapper = document.getElementById('field-wrapper-agree_terms');
+    if (agreeWrapper) {
+      agreeWrapper.style.opacity = '1';
+      agreeWrapper.style.pointerEvents = 'auto';
+    }
   }
 
   // ========== ステッパーUI生成 ==========
