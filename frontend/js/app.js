@@ -283,10 +283,24 @@ class CheckinForm {
 
   // ========== 送信 ==========
   async handleSubmit(texts) {
-    // TODO: バックエンド接続後に有効化する
+    // ボタンをローディング状態にする
+    this.nextText.textContent = texts.buttons?.submitting || '送信中...';
+    this.nextArrow.classList.add('hidden');
+    const spinner = document.getElementById('submit-spinner');
+    if (spinner) spinner.classList.remove('hidden');
+    this.nextBtn.disabled = true;
+
     console.log('Form Data (テスト — 未送信):', this.answers);
-    alert('テスト段階のため、送信は無効です。\nフォームデータはコンソールに出力されています。');
-    return;
+    
+    // ダミーの送信待機時間
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // 送信完了画面を表示
+    const modal = document.getElementById('success-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 背景のスクロール禁止
+    }
   }
 
   // ========== フィールド構築 ==========
@@ -310,7 +324,8 @@ class CheckinForm {
 
     } else if (field.type === 'radio' && field.options) {
       inputEl = document.createElement('div');
-      inputEl.className = 'flex gap-3';
+      // オプションが1つの場合は中央揃え＆半分の幅、複数ある場合は均等割り付け
+      inputEl.className = field.options.length === 1 ? 'flex gap-3 max-w-[50%] mx-auto' : 'flex gap-3';
       field.options.forEach(optVal => {
         const pill = document.createElement('div');
         pill.className = 'pill-radio flex-1 relative';
@@ -682,11 +697,11 @@ class CheckinForm {
     const container = document.createElement('div');
 
     const inputRow = document.createElement('div');
-    inputRow.className = 'flex gap-2 items-center';
+    inputRow.className = 'flex gap-2 items-center w-full';
 
     const input = document.createElement('input');
     input.type = 'text';
-    input.className = 'form-input flex-1';
+    input.className = 'form-input flex-1 min-w-0';
     input.id = field.id;
     input.inputMode = 'numeric';
     input.maxLength = 8;

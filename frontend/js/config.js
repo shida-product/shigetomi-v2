@@ -242,7 +242,7 @@ export const CONFIG = {
         1: "Our facility is required by law to record all guests' information in a guest register and retain it for three years.\nPlease enter your name exactly as it appears on your passport or official identification document.",
         2: "Under Japan's Inn Business Act, we are required to record guests' addresses.\nResidents of Japan: please enter your Japanese address. Residents outside Japan: please enter your home country address.",
         3: "Under Article 4-2 of the Enforcement Regulations of Japan's Inn Business Act, foreign guests without an address in Japan are required to provide the following information.\nYour passport copy will be stored alongside the guest register for three years.",
-        4: "Please enter your planned arrival and departure dates and times.\nCheck-in: From 15:00 (3:00 PM) \/ Check-out: By 10:00 (10:00 AM)\n*If you wish to check in or out outside these hours, please contact us by phone in advance.*",
+        4: "Please enter your planned arrival and departure dates and times.\nCheck-in: From 3:00 PM \/ Check-out: By 10:00 AM\n*If you wish to check in or out outside these hours, please contact us by phone in advance.*",
         5: "[Review of Accommodation Agreement & House Rules]\nPlease review our House Manual before your stay.\n▼ House Manual: [Link URL]\n\n[IMPORTANT]\n★ The entire facility is non-smoking. Please smoke in the garden only.\n★ As we are in a residential area, please keep noise to a minimum.\n\nPlease select 'Yes' if you agree to the above.\n*If you do not agree, we may not be able to accommodate your stay.*",
         6: "Your responses will help us improve our services and operations going forward."
       },
@@ -321,7 +321,7 @@ export const CONFIG = {
         1: "여관업법에 따라 모든 고객님의 정보를 숙박자 명부에 기재하고 3년간 보존할 의무가 있습니다.\n여권 또는 공식 신분증에 기재된 이름과 정확히 일치하도록 입력해 주십시오.",
         2: "여관업법에 따라 숙박 고객님의 주소 기재가 필요합니다.\n일본 국내 거주자는 일본 주소를, 비거주자는 본국 주소를 기입해 주십시오.",
         3: "여관업법 시행규칙 제4조의2에 따라, 일본 국내에 주소를 보유하지 않은 외국인 고객님께서는 아래 정보를 제공하셔야 합니다.\n제출하신 여권 사본은 숙박자 명부와 함께 3년간 보존됩니다.",
-        4: "도착 및 출발 예정 일시를 기입해 주십시오.\n체크인: 15:00 이후 \/ 체크아웃: 10:00까지\n*위 시간 외 체크인\/체크아웃을 희망하시는 경우, 사전에 전화로 문의해 주십시오.*",
+        4: "도착 및 출발 예정 일시를 기입해 주십시오.\n체크인: 오후 3:00 이후 \/ 체크아웃: 오전 10:00까지\n*위 시간 외 체크인\/체크아웃을 희망하시는 경우, 사전에 전화로 문의해 주십시오.*",
         5: "[숙박 약관 및 이용 규정 확인]\n숙박 전 당 시설의 하우스 매뉴얼을 확인해 주십시오.\n▼ 하우스 매뉴얼: [Link URL]\n\n【중요】\n★ 관내 전면 금연입니다. 흡연은 정원에서 부탁드립니다.\n★ 주택가에 위치하고 있으므로 소음에 주의해 주십시오.\n\n내용을 확인하신 후 동의하시면 '예'를 선택해 주십시오.\n※ 동의하지 않으시는 경우 숙박이 불가합니다.",
         6: "향후 서비스 개선 및 운영 향상을 위한 참고 자료로 활용됩니다."
       },
@@ -401,7 +401,7 @@ export const CONFIG = {
         1: "本設施根據旅館業法的規定，有義務將所有入住客人的資訊登記在住宿者名簿上並保存三年。\n請嚴格按照您的護照或官方身份證件上的姓名填寫。",
         2: "根據《旅館業法》的規定，需要登記住宿者的地址。\n居住在日本的客人請填寫日本地址，非居住者請填寫本國地址。",
         3: "根據《旅館業法施行規則》第4條之2的規定，在日本沒有地址的外國客人須提供以下資訊。\n您提交的護照影本將與住宿者名簿一同保存三年。",
-        4: "請填寫您計劃抵達和離開的日期和時間。\n入住時間：15:00起 \/ 退房時間：10:00前\n*如果您希望在上述時間以外辦理入住或退房，請提前致電聯繫。*",
+        4: "請填寫您計劃抵達和離開的日期和時間。\n入住時間：下午 3:00 起 \/ 退房時間：上午 10:00 前\n*如果您希望在上述時間以外辦理入住或退房，請提前致電聯繫。*",
         5: "【住宿條款及使用規定確認】\n入住前請確認本設施的房屋手冊。\n▼ 房屋手冊: [Link URL]\n\n【重要】\n★ 館內全面禁煙，請於庭院吸煙。\n★ 本設施位於住宅區，請注意保持安靜。\n\n確認內容後，若同意請選擇「是」。\n※如不同意，將無法安排住宿。",
         6: "您的回覆將有助於我們提升服務品質並改善未來的營運。"
       },
@@ -430,7 +430,7 @@ export const CONFIG = {
         1: "本设施根据旅馆业法的规定，有义务将所有入住客人的信息登记在住宿者名簿上并保存三年。\n请严格按照您的护照或官方身份证件上的姓名填写。",
         2: "根据《旅馆业法》的规定，需要登记住宿者的地址。\n居住在日本的客人请填写日本地址，非居住者请填写本国地址。",
         3: "根据《旅馆业法施行规则》第4条之2的规定，在日本没有地址的外国客人须提供以下信息。\n您提交的护照复印件将与住宿者名簿一同保存三年。",
-        4: "请填写您计划抵达和离开的日期和时间。\n入住时间：15:00起 \/ 退房时间：10:00前\n*如果您希望在上述时间以外办理入住或退房，请提前致电联系。*",
+        4: "请填写您计划抵达和离开的日期和时间。\n入住时间：下午 3:00 起 \/ 退房时间：上午 10:00 前\n*如果您希望在上述时间以外办理入住或退房，请提前致电联系。*",
         5: "【住宿条款及使用规定确認】\n入住前请确認本设施的房屋手册。\n▼ 房屋手册: [Link URL]\n\n【重要】\n★ 馆内全面禁烟，请于庭院吸烟。\n★ 本设施位于住宅区，请注意保持安静。\n\n确認内容后，若同意请选择「是」。\n※如不同意，将无法安排住宿。",
         6: "您的回答将帮助我们提升服务质量并改善今后的运营。"
       },
