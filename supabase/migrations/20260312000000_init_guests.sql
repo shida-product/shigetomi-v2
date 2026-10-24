@@ -1,3 +1,6 @@
+-- 【注意】本番（shida.product）では 2026-10-24 に guests テーブル・passport-photos バケット・関連ポリシーを削除済み（未使用・0件）。セルフチェックインの台帳は yado-hub が別の Supabase で持つ。
+-- この migration は設計時の記録として残す。本番へ再適用しないこと。
+
 -- migration: init guests table and RLS policies
 
 -- Enable specific extensions if needed

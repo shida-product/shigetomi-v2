@@ -32,6 +32,8 @@ Googleフォームベースのチェックインシステム（v1）を、独自
 | サーバー処理 | Supabase Edge Functions |
 | 通知 | Slack Webhook |
 
+> 上表の Supabase は計画時の構成で、現在の `frontend/` は Supabase に接続していない。本番（shida.product）では 2026-10-24 に guests テーブル・passport-photos バケット・関連ポリシーを削除済み（未使用・0件）。セルフチェックインの台帳は yado-hub が別の Supabase で持つ。
+
 ---
 
 ## 対応言語（6言語）
