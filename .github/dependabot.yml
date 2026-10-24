@@ -1,0 +1,11 @@
+# 依存の更新（Keystone rules/DELIVERY.md §4）。
+# package.json がないため npm は対象外。
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions-minor-patch:
+        update-types: [minor, patch]
